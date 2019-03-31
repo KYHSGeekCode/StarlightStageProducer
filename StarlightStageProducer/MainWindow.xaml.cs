@@ -25,8 +25,6 @@ namespace StarlightStageProducer {
 			Data.Idols = FileSystem.GetIdols();
 			Data.CountMap = FileSystem.GetCheck();
 
-            addAllIdol(0);
-
             network = new Network();
 			network.Completed += Network_Completed;
 			network.Loading += Network_Loading;
@@ -305,8 +303,7 @@ namespace StarlightStageProducer {
 
 
 		private void buttonVersionSync_Response(object sender, CustomButtonEventArgs e) {
-            addAllIdol(1);
-            // System.Diagnostics.Process.Start(LastestUrl);
+            System.Diagnostics.Process.Start(LastestUrl);
 		}
 
 		private void VersionSync(object sender, DoWorkEventArgs e) {
