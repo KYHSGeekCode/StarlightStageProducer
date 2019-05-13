@@ -25,7 +25,7 @@ namespace StarlightStageProducer {
 			Data.Idols = FileSystem.GetIdols();
 			Data.CountMap = FileSystem.GetCheck();
 
-			network = new Network();
+            network = new Network();
 			network.Completed += Network_Completed;
 			network.Loading += Network_Loading;
 
@@ -72,6 +72,30 @@ namespace StarlightStageProducer {
 			refreshCount();
 			refreshFilter(text);
 		}
+
+        private void addAllIdol(int cnt) {
+            gridContent.Children.Clear();
+            DictView.Clear();
+
+            for (int i = 0; i < Data.Idols.Count; i++)
+            {
+                Idol idol = Data.Idols[i];
+                if (idol.Rarity == Rarity.SSR)
+                {
+                    Data.ApplyCount(idol.Id, cnt);
+                }
+
+                IdolView view = new IdolView(idol, Data.GetCount(idol.Id));
+                view.Margin = new Thickness(70 * (i % 8), 70 * (i / 8), 0, 0);
+                view.CheckChanged += CheckChanged;
+
+                gridContent.Children.Add(view);
+                DictView.Add(idol.Id, view);
+            }
+
+            refreshCount();
+            refreshFilter("");
+        }
 
 		private void refreshFilter(string text) {
 			bool cute = checkCute.IsChecked.Value;
@@ -279,7 +303,7 @@ namespace StarlightStageProducer {
 
 
 		private void buttonVersionSync_Response(object sender, CustomButtonEventArgs e) {
-			System.Diagnostics.Process.Start(LastestUrl);
+            System.Diagnostics.Process.Start(LastestUrl);
 		}
 
 		private void VersionSync(object sender, DoWorkEventArgs e) {
