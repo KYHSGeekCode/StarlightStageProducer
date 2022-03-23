@@ -158,40 +158,45 @@ namespace StarlightStageProducer {
                 string[] centerSkillSplit = { "센터 효과" };
                 string infoScore = Network.GET(string.Format("{0}={1}", Network.InfoEndPoint, infoId));
 
+ 
 				this.CenterSkillType = CenterSkillType.Unknown;
                 this.CenterSkillCondition = CenterSkillCondition.None;
+                if (infoScore != null)
+                {
+                    if (infoScore.IndexOf("큐트 아이돌만 편성") >= 0)
+                    {
+                        this.CenterSkillCondition = CenterSkillCondition.Cute;
+                    }
+                    else if (infoScore.IndexOf("쿨 아이돌만 편성") >= 0)
+                    {
+                        this.CenterSkillCondition = CenterSkillCondition.Cool;
+                    }
+                    else if (infoScore.IndexOf("패션 아이돌만 편성") >= 0)
+                    {
+                        this.CenterSkillCondition = CenterSkillCondition.Passion;
+                    }
+                    else if (infoScore.IndexOf("3 타입 아이돌이 전부 편성") >= 0)
+                    {
+                        this.CenterSkillCondition = CenterSkillCondition.All;
+                    }
 
-                if (infoScore.IndexOf("큐트 아이돌만 편성") >= 0)
-                {
-                    this.CenterSkillCondition = CenterSkillCondition.Cute;
+                    if (infoScore.IndexOf("큐트 아이돌의") >= 0)
+                    {
+                        this.CenterSkillType = CenterSkillType.Cute;
+                    }
+                    else if (infoScore.IndexOf("쿨 아이돌의") >= 0)
+                    {
+                        this.CenterSkillType = CenterSkillType.Cool;
+                    }
+                    else if (infoScore.IndexOf("패션 아이돌의") >= 0)
+                    {
+                        this.CenterSkillType = CenterSkillType.Passion;
+                    }
+                    else if (infoScore.IndexOf("모두의") >= 0)
+                    {
+                        this.CenterSkillType = CenterSkillType.All;
+                    }
                 }
-                else if (infoScore.IndexOf("쿨 아이돌만 편성") >= 0)
-                {
-                    this.CenterSkillCondition = CenterSkillCondition.Cool;
-                }
-                else if (infoScore.IndexOf("패션 아이돌만 편성") >= 0)
-                {
-                    this.CenterSkillCondition = CenterSkillCondition.Passion;
-                }
-                else if (infoScore.IndexOf("3 타입 아이돌이 전부 편성") >= 0)
-                {
-                    this.CenterSkillCondition = CenterSkillCondition.All;
-                }
-
-                if (infoScore.IndexOf("큐트 아이돌의") >= 0) {
-					this.CenterSkillType = CenterSkillType.Cute;
-				}
-                else if(infoScore.IndexOf("쿨 아이돌의") >= 0) {
-					this.CenterSkillType = CenterSkillType.Cool;
-				}
-				else if(infoScore.IndexOf("패션 아이돌의") >= 0) {
-					this.CenterSkillType = CenterSkillType.Passion;
-                }
-                else if (infoScore.IndexOf("모두의") >= 0)
-                {
-                    this.CenterSkillType = CenterSkillType.All;
-                }
-
                 if (split[0] == "C") {
 					switch (split[1]) {
 						case "보컬어필":
@@ -215,6 +220,10 @@ namespace StarlightStageProducer {
                         case "신데렐라 챰":
                             this.CenterSkill = CenterSkill.Charm;
                             break;
+                        case "특기발동률":
+                            this.CenterSkill = CenterSkill.Skill;
+                            break;
+
                         default:
 							this.CenterSkill = CenterSkill.None;
 							break;
@@ -262,6 +271,50 @@ namespace StarlightStageProducer {
 						case "무적":
 							this.Skill = Skill.Guard;
 							break;
+
+                        case "컨센":
+                            this.Skill = Skill.Concentration;
+                            break;
+
+                        case "시너지":
+                            this.Skill = Skill.Synergy;
+                            break;
+
+                        case "플릭 액트":
+                            this.Skill = Skill.FlickAct;
+                            break;
+
+                        case "롱 액트":
+                            this.Skill = Skill.LongAct;
+                            break;
+
+                        case "튜닝":
+                            this.Skill = Skill.Tuning;
+                            break;
+
+                        case "올라운드":
+                            this.Skill = Skill.AllRound;
+                            break;
+
+                        case "코디네이트":
+                            this.Skill = Skill.Chord;
+                            break;
+
+                        case "스킬부스트":
+                            this.Skill = Skill.Boost;
+                            break;
+
+                        case "앙코르":
+                            this.Skill = Skill.Anchor;
+                            break;
+
+                        case "라이프스파클":
+                            this.Skill = Skill.Sparkle;
+                            break;
+
+                        case "포커스":
+                            this.Skill = Skill.Focus;
+                            break;
 
 						default:
 							this.Skill = Skill.None;

@@ -18,6 +18,17 @@ namespace StarlightStageProducer {
             Skill.Heal,
             Skill.Guard,
             Skill.Overload,
+            Skill.AllRound,
+            Skill.Anchor,
+            Skill.Boost,
+            Skill.Chord,
+            Skill.Concentration,
+            Skill.FlickAct,
+            Skill.Focus,
+            Skill.LongAct,
+            Skill.Sparkle,
+            Skill.Synergy,
+            Skill.Tuning,
             Skill.Ignore
 		};
         public static Type[] TypeIndex = new Type[] {
@@ -51,8 +62,8 @@ namespace StarlightStageProducer {
 				.Where(i => CountMap.ContainsKey(i.Id))
 				.SelectMany(i => Enumerable.Repeat(i, CountMap[i.Id])).ToList();
 		}
-
-		public static int[] SkillCount = new int[] { 0, 3, 2, 0, 0, 0, 0, 0 };
+        //                                           N  S  C  PS CS H  G OL  B SY AR SP AC CH CS  F  T LA FA
+		public static int[] SkillCount = new int[] { 0, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		public static Dictionary<int, int> CountMap = new Dictionary<int, int>();
 		public static Burst BurstMode = Burst.None;
 		public static bool CheckSkill = true;
